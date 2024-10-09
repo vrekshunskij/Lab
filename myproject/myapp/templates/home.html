@@ -1,12 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Хрестики-Нулики</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            grid-gap: 10px;
+        }
+
+        .cell {
+            width: 120px;
+            height: 120px;
+            font-size: 3em;
+            text-align: center;
+            line-height: 120px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cell:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .cell:active {
+            transform: scale(0.95);
+        }
+
+        #winner, #current-player {
+            margin-top: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        #winner {
+            color: #28a745;
+        }
+
+        #current-player {
+            color: #007bff;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004085;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(3, 80px);
+                grid-gap: 5px;
+            }
+
+            .cell {
+                width: 80px;
+                height: 80px;
+                font-size: 2em;
+                line-height: 80px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Home Page</h1>
-    <a href="{% url 'about' %}">Go to About Page</a>
+    <h1>Хрестики-Нулики</h1>
+    
+    <div class="grid">
+        <div class="cell" onclick="makeMove(this, 0)"></div>
+        <div class="cell" onclick="makeMove(this, 1)"></div>
+        <div class="cell" onclick="makeMove(this, 2)"></div>
+        <div class="cell" onclick="makeMove(this, 3)"></div>
+        <div class="cell" onclick="makeMove(this, 4)"></div>
+        <div class="cell" onclick="makeMove(this, 5)"></div>
+        <div class="cell" onclick="makeMove(this, 6)"></div>
+        <div class="cell" onclick="makeMove(this, 7)"></div>
+        <div class="cell" onclick="makeMove(this, 8)"></div>
+    </div>
+
+    <div id="current-player">Хід гравця: X</div>
+    <div id="winner"></div>
+
+    <div class="button-container">
+        <button id="restart-btn" onclick="restartGame()">Почати гру заново</button>
+        <a href="{% url 'about' %}"><button>Наступна гра</button></a>
+    </div>
+
+    <script>
+        let currentPlayer = "X";
+        let board = ["", "", "", "", "", "", "", "", ""];
+        let gameActive = true;
+        const winningCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        function makeMove(cell, index) {
+            if (cell.innerHTML === "" && gameActive) {
+                cell.innerHTML = currentPlayer;
+                board[index] = currentPlayer;
+                if (checkWinner()) {
+                    document.getElementById('winner').innerHTML = `Переможець: ${currentPlayer}`;
+                    document.getElementById('current-player').innerHTML = "";
+                    gameActive = false;
+                } else if (!board.includes("")) {
+                    document.getElementById('winner').innerHTML = `Нічия!`;
+                    document.getElementById('current-player').innerHTML = "";
+                    gameActive = false;
+                } else {
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                    document.getElementById('current-player').innerHTML = `Хід гравця: ${currentPlayer}`;
+                }
+            }
+        }
+
+        function checkWinner() {
+            for (let i = 0; i < winningCombinations.length; i++) {
+                const [a, b, c] = winningCombinations[i];
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function restartGame() {
+            currentPlayer = "X";
+            board = ["", "", "", "", "", "", "", "", ""];
+            gameActive = true;
+            document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+            document.getElementById('winner').innerHTML = "";
+            document.getElementById('current-player').innerHTML = `Хід гравця: X`;
+        }
+    </script>
 </body>
 </html>

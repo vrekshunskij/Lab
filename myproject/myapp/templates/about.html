@@ -1,12 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>Просте Казино</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .reel {
+            width: 70px;
+            height: 70px;
+            background-color: #ddd;
+            border: 2px solid #333;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            transition: transform 0.5s ease;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004085;
+        }
+
+        #result {
+            font-size: 1.8em;
+            margin-top: 20px;
+        }
+
+        #attempts, #wins {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .reel {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 8px 16px;
+            }
+        }
+
+        /* CSS анімація */
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-100%); }
+            50% { transform: translateY(-200%); }
+            75% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .spin {
+            animation: spin 0.5s ease forwards;
+        }
+    </style>
 </head>
 <body>
-    <h1>About Page</h1>
-    <a href="{% url 'home' %}">Go to Home Page</a>
+    <div class="container">
+        <h1>Казино Ігровий Автомат</h1>
+        <div class="slot-machine">
+            <div class="reel" id="reel1"></div>
+            <div class="reel" id="reel2"></div>
+            <div class="reel" id="reel3"></div>
+        </div>
+        <button id="reset-button">Почати гру заново</button>
+        <button id="spin-button">Крутити!</button>
+        <a href="{% url 'home' %}"><button>Попередня гра</button></a>
+        <p id="result"></p>
+        <p id="attempts">Кількість спроб: <span id="attempt-count">0</span></p>
+        <p id="wins">Кількість виграшів: <span id="win-count">0</span></p>
+    </div>
+    <script>
+        const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '🔔', '⭐'];
+        const spinButton = document.getElementById('spin-button');
+        const resetButton = document.getElementById('reset-button');
+        const resultDisplay = document.getElementById('result');
+        const attemptCountDisplay = document.getElementById('attempt-count');
+        const winCountDisplay = document.getElementById('win-count');
+        let attempts = 0;
+
+        function getRandomSymbol() {
+            return symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        function spinReels() {
+            const reel1 = document.getElementById('reel1');
+            const reel2 = document.getElementById('reel2');
+            const reel3 = document.getElementById('reel3');
+
+            // Анімація крутіння
+            reel1.style.transform = 'rotate(360deg)';
+            reel2.style.transform = 'rotate(360deg)';
+            reel3.style.transform = 'rotate(360deg)';
+
+            // Показує обертові символи
+            let animationInterval = setInterval(() => {
+                reel1.textContent = getRandomSymbol();
+                reel2.textContent = getRandomSymbol();
+                reel3.textContent = getRandomSymbol();
+            }, 100); // Затримка для зміни символів
+
+            // Затримка для завершення анімації
+            setTimeout(() => {
+                clearInterval(animationInterval);
+                const symbol1 = reel1.textContent;
+                const symbol2 = reel2.textContent;
+                const symbol3 = reel3.textContent;
+
+                // Встановлюємо фінальні символи
+                reel1.textContent = symbol1;
+                reel2.textContent = symbol2;
+                reel3.textContent = symbol3;
+
+                // Скидаємо анімацію
+                reel1.style.transform = '';
+                reel2.style.transform = '';
+                reel3.style.transform = '';
+
+                checkResult(symbol1, symbol2, symbol3);
+                attempts++;
+                attemptCountDisplay.textContent = attempts;
+            }, 1000); // Час для анімації (1 секунда)
+        }
+
+        function checkResult(symbol1, symbol2, symbol3) {
+            if (symbol1 === symbol2 && symbol2 === symbol3) {
+                resultDisplay.textContent = 'Ви виграли! 🎉';
+                winCountDisplay.textContent = parseInt(winCountDisplay.textContent) + 1; // Додає виграш
+            } else {
+                resultDisplay.textContent = 'Спробуйте ще раз!';
+            }
+        }
+
+        function resetGame() {
+            const reel1 = document.getElementById('reel1');
+            const reel2 = document.getElementById('reel2');
+            const reel3 = document.getElementById('reel3');
+
+            // Скидання символів на барабанах
+            reel1.textContent = '';
+            reel2.textContent = '';
+            reel3.textContent = '';
+
+            // Обнулення лічильників
+            attempts = 0;
+            attemptCountDisplay.textContent = attempts;
+            winCountDisplay.textContent = 0; // Обнулити виграші
+            resultDisplay.textContent = ''; // Очистити результат
+        }
+
+        spinButton.addEventListener('click', spinReels);
+        resetButton.addEventListener('click', resetGame);
+    </script>
 </body>
 </html>
