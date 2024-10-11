@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none; /* Вимикаємо маркери */
+            padding: 0; /* Вимикаємо відступи */
+        }
+        li {
+            background-color: #e7f3fe; /* Світло-блакитний фон для кожної статті */
+            border: 1px solid #b8daff; /* Світло-синя рамка */
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s; /* Плавний перехід фону */
+        }
+        li:hover {
+            background-color: #d0e9ff; /* Темніший блакитний фон при наведенні */
+        }
+        .create-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #4CAF50; /* Зелений фон */
+            color: white; /* Білий текст */
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none; /* Вимикаємо підкреслення */
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .create-link:hover {
+            background-color: #45a049; /* Темніший зелений при наведенні */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Articles</h1>
+        <ul>
+            {% for article in articles %}
+                <li>{{ article.title }}: {{ article.description }}</li>
+            {% empty %}
+                <li>No articles available.</li> <!-- Повідомлення, якщо статей немає -->
+            {% endfor %}
+        </ul>
+        <a class="create-link" href="{% url 'create' %}">Create a new article</a> <!-- Стилізоване посилання для створення нової статті -->
+    </div>
+</body>
+</html>
