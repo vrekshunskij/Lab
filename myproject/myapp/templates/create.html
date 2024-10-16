@@ -66,19 +66,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>Create a New Article</h1>
+        <h1>Написати новий відгук</h1>
         <form action="{% url 'create' %}" method="post">
             {% csrf_token %}
-            <label for="title">Title:</label>
+            <label for="title">Заголовок:</label>
             <input type="text" name="title" id="title" required>
 
-            <label for="description">Description:</label>
+            <label for="description">Опис:</label>
             <textarea name="description" id="description" required></textarea>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Надіслати">
         </form>
         <div class="back-link">
-            <a href="{% url 'index' %}">Back to articles</a> <!-- Повернутись до списку статей -->
+            <a href="{% url 'index' %}">Повернутись до відгуків</a> <!-- Повернутись до списку статей -->
         </div>
     </div>
 </body>

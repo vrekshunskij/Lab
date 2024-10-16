@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизація, Реєстрація та Відновлення пароля</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .toggle-link, .forgot-password {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .toggle-link:hover, .forgot-password:hover {
+            color: #007BFF;
+        }
+
+        .back-to-home {
+            margin-top: 20px; /* Відступ зверху */
+            background-color: #4CAF50; 
+            color: white; /* Білий текст */
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none; /* Вимкнути підкреслення */
+            font-weight: bold;
+            display: inline-block; /* Дозволяємо займати ширину кнопки */
+            transition: background-color 0.3s;
+        }
+
+        .back-to-home:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <!-- Форма для авторизації -->
+    <div id="login-form">
+        <h2>Вхід</h2>
+        <form>
+            <input type="text" placeholder="Логін" required>
+            <input type="password" placeholder="Пароль" required>
+            <button type="submit">Увійти</button>
+            <a href="{% url 'main' %}" class="back-to-home">Повернутись на головну</a>
+            <div class="forgot-password" onclick="toggleForm('forgot')">Забули пароль?</div>
+        </form>
+        <div class="toggle-link" onclick="toggleForm('register')">Немає облікового запису? Зареєструватися</div>
+    </div>
+
+    <!-- Форма для реєстрації -->
+    <div id="register-form" style="display: none;">
+        <h2>Реєстрація</h2>
+        <form>
+            <input type="text" placeholder="Логін" required>
+            <input type="email" placeholder="Електронна пошта" required>
+            <input type="password" placeholder="Пароль" required>
+            <input type="password" placeholder="Підтвердження пароля" required>
+            <button type="submit">Зареєструватися</button>
+        </form>
+        <div class="toggle-link" onclick="toggleForm('login')">Вже є обліковий запис? Увійти</div>
+    </div>
+
+    <!-- Форма для відновлення пароля -->
+    <div id="forgot-form" style="display: none;">
+        <h2>Відновлення пароля</h2>
+        <form>
+            <input type="email" placeholder="Введіть вашу електронну пошту" required>
+            <button type="submit">Надіслати інструкції</button>
+        </form>
+        <div class="toggle-link" onclick="toggleForm('login')">Повернутися до входу</div>
+    </div>
+</div>
+
+<script>
+    function toggleForm(form) {
+        var loginForm = document.getElementById('login-form');
+        var registerForm = document.getElementById('register-form');
+        var forgotForm = document.getElementById('forgot-form');
+
+        if (form === 'register') {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            forgotForm.style.display = 'none';
+        } else if (form === 'forgot') {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'none';
+            forgotForm.style.display = 'block';
+        } else {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            forgotForm.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>

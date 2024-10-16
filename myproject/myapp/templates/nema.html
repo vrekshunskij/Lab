@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гра в розробці</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column; /* Вирівнюємо по вертикалі */
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            margin: 0; 
+            background-color: #a5e3e9; 
+            font-family: 'Arial', sans-serif; 
+            font-size: 48px; 
+            color: #333; 
+            text-align: center; 
+        }
+        .home-button {
+            margin-top: 20px; /* Відстань між заголовком і кнопкою */
+            padding: 10px 20px; /* Внутрішні відступи кнопки */
+            font-size: 24px; /* Розмір шрифту кнопки */
+            color: #fff; /* Колір тексту кнопки */
+            background-color: #007BFF; /* Колір фону кнопки */
+            border: none; /* Без рамки */
+            border-radius: 5px; /* Закруглені кути */
+            cursor: pointer; /* Курсор у вигляді руки при наведенні */
+            text-decoration: none; /* Без підкреслення */
+        }
+        .home-button:hover {
+            background-color: #0056b3; /* Зміна кольору при наведенні */
+        }
+    </style>
+</head>
+<body>
+    <h1>Гра в розробці</h1>
+    <a href="{% url 'main' %}" class="home-button">Головна сторінка</a> <!-- Посилання на головну сторінку -->
+</body>
+</html>

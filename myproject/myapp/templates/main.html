@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Layout</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #a5e3e9, #f3e1e1); /* Градієнтний фон */
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: rgba(255, 255, 255, 0.9); /* Напівпрозорий фон */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+            font-family: 'Verdana', sans-serif; /* Змінено шрифт */
+            font-size: 36px; /* Розмір шрифту */
+            color: #333; /* Колір тексту */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Тінь для тексту */
+        }
+
+        .top-right-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-right-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-decoration: none;
+        }
+
+        .top-right-icons a img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 10px;
+            padding: 20px;
+        }
+
+        .logo, .game {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img, .game img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .logo {
+            grid-column: span 1;
+        }
+
+        .game {
+            width: 100px;
+            height: 100px;
+        }
+
+        /* Налаштування для повторення зображення Subway Surfers */
+        .subway-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 стовпці */
+            grid-template-rows: repeat(3, 1fr); /* 3 рядки */
+            gap: 5px; /* Відстань між зображеннями */
+            grid-column: span 1; /* Займає 2 стовпці */
+        }
+
+     
+    </style>
+</head>
+<body>
+    {% load static %}
+    <div class="header">
+        <h1>🅾🅽🅻🅸🅽🅴 🅶🅰🅼🅴🆂</h1>
+        <div class="top-right-icons">
+            <a href="{% url 'login' %}">
+                <img src="{% static 'login-icon.png' %}" alt="Login">
+            </a>
+            <a href="{% url 'index' %}">
+                <img src="{% static 'feedback-icon.png' %}" alt="Feedback">
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <a href="{% url 'hrest' %}">
+                <img src="{% static 'xo.png' %}" alt="Хрестики - Нулики">
+            </a>
+        </div>
+        
+        <!-- Контейнер для Subway Surfers -->
+        <div class="subway-container">
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ss.jpg' %}" alt="Subway Surfers">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'tr.png' %}" alt="Temple Run 2">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'hc.jpg' %}" alt="">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'cc.jpg' %}" alt="Candy Crush Saga">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'talktom.png' %}" alt="My Talking Tom">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'bb.png' %}" alt="Brawl Stars">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'clash.jpg' %}" alt="Clash of Clans">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'fn.jpg' %}" alt="Fruit Ninja">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ab.png' %}" alt="Angry Birds">
+                </a>
+            </div>
+        </div>
+
+        <div class="logo">
+            <a href="{% url 'about' %}">
+                <img src="{% static 'cas.png' %}" alt="Онлайн казино">
+            </a>
+        </div>
+        <div class="subway-container">
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ss.jpg' %}" alt="Subway Surfers">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'tr.png' %}" alt="Temple Run 2">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'hc.jpg' %}" alt="">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'cc.jpg' %}" alt="Candy Crush Saga">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'talktom.png' %}" alt="My Talking Tom">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'bb.png' %}" alt="Brawl Stars">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'clash.jpg' %}" alt="Clash of Clans">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'fn.jpg' %}" alt="Fruit Ninja">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ab.png' %}" alt="Angry Birds">
+                </a>
+            </div>
+        </div>
+        <div class="logo">
+            <a href="{% url 'nema' %}">
+                <img src="{% static 'pok.png' %}" alt="minecraft">
+            </a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="subway-container">
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ss.jpg' %}" alt="Subway Surfers">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'tr.png' %}" alt="Temple Run 2">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'hc.jpg' %}" alt="">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'cc.jpg' %}" alt="Candy Crush Saga">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'talktom.png' %}" alt="My Talking Tom">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'bb.png' %}" alt="Brawl Stars">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'clash.jpg' %}" alt="Clash of Clans">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'fn.jpg' %}" alt="Fruit Ninja">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ab.png' %}" alt="Angry Birds">
+                </a>
+            </div>
+        </div>
+        <div class="logo">
+            <a href="{% url 'hrest' %}">
+                <img src="{% static 'tetris.png' %}" alt="Хрестики - Нулики">
+            </a>
+        </div>
+
+        <div class="subway-container">
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ss.jpg' %}" alt="Subway Surfers">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'tr.png' %}" alt="Temple Run 2">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'hc.jpg' %}" alt="">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'cc.jpg' %}" alt="Candy Crush Saga">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'talktom.png' %}" alt="My Talking Tom">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'bb.png' %}" alt="Brawl Stars">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'clash.jpg' %}" alt="Clash of Clans">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'fn.jpg' %}" alt="Fruit Ninja">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ab.png' %}" alt="Angry Birds">
+                </a>
+            </div>
+        </div>
+
+        <div class="logo">
+            <a href="{% url 'about' %}">
+                <img src="{% static 'snake.png' %}" alt="Змійка">
+            </a>
+        </div>
+
+        <div class="subway-container">
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ss.jpg' %}" alt="Subway Surfers">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'tr.png' %}" alt="Temple Run 2">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'hc.jpg' %}" alt="">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'cc.jpg' %}" alt="Candy Crush Saga">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'talktom.png' %}" alt="My Talking Tom">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'bb.png' %}" alt="Brawl Stars">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'clash.jpg' %}" alt="Clash of Clans">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'fn.jpg' %}" alt="Fruit Ninja">
+                </a>
+            </div>
+            <div class="game">
+                <a href="{% url 'nema' %}">
+                    <img src="{% static 'ab.png' %}" alt="Angry Birds">
+                </a>
+            </div>
+        </div>
+
+        
+    </div>
+   
+   
+    
+</body>
+</html>

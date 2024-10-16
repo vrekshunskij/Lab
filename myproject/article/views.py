@@ -13,3 +13,9 @@ def create(request):
         )
         return redirect('/')
     return render(request, 'create.html')
+
+def clear_articles(request):
+    if request.method == 'POST':
+        Article.objects.all().delete()  # Очищення всіх статей
+        return redirect('/')  # Перенаправлення на головну сторінку
+    return render(request, 'clear.html')  # Повертаємо шаблон для підтвердження очищення
