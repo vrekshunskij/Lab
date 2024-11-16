@@ -1,1 +1,1 @@
-Django project 
+Flask project 
